@@ -74,7 +74,7 @@ userSchema.methods = {
 
         try{
 
-            return crypto.createHmac('sha1',secret)
+            return crypto.createHmac('sha1',process.env.JWT_SECRET)
             .update(password)
             .digest('hex')
 
