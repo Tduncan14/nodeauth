@@ -1,17 +1,17 @@
 const express = require('express');
-const { signup,accountActivation} = require('../controllers/auth');
+const { signup,accountActivation,signin} = require('../controllers/auth');
 
 
 const router = express.Router();
-const {userSignupValidator} = require('../validators/auth');
+const {userSignupValidator,userSigninValidator} = require('../validators/auth');
 const {runValidation} = require('../validators');
 
 router.post('/signup',userSignupValidator,runValidation,signup )
 
 
-router.post('/account-activation',accountActivation)
+router.post('/account-activation',userSigninValidator,runValidation,accountActivation)
 
-
+router.post('/signin',signin)
 
 
 

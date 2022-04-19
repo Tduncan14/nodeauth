@@ -168,3 +168,63 @@ exports.accountActivation = (req,res) => {
 
 
 }
+
+
+exports.signin = (req,res) => {
+
+        // you need and password to signin
+
+
+        const {email,password} = req.body
+        // check to see if user exist
+
+                User.findOne({email}).exec((err,user) =>{
+
+                        if(err || !user){
+                                return res.status(400).json({
+                                        error:"User with the email doesnt exist. Please signup"
+                                })
+                        }
+
+
+                        // authenicate if passweord dont match
+                        if(!user.authenicate(password)){
+
+                                return res.status(400).json({
+                                        error:'Email and password  do not match'
+                                })
+
+                        }
+
+
+
+                        const token = jwt.sign({_id:user._id},process.env.JWT_SECRET,{expiresIn:'1d'})
+
+
+                        const {_id,name,email,role} = user
+
+                        return res.json({
+                                token,
+                                user: {_id,name,email,role}
+                        })
+                
+                })
+
+
+
+            // if the user exist and you want to match the password
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

@@ -63,7 +63,7 @@ userSchema.methods = {
 
     authenicate:function(plainPassword){
 
-        return this.encryptPassword(plainPassword) = this.hashed_password;
+        return this.encryptPassword(plainPassword) === this.hashed_password;
 
     },
 

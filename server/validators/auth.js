@@ -23,3 +23,27 @@ exports.userSignupValidator = [
     .isLength(6)
     . withMessage( 'password more than 6 letters long')
 ]
+
+
+exports.userSigninValidator = [
+
+
+
+    check('email')
+    .not()
+    .isEmpty()
+    .isEmail()
+    .withMessage('must be a valid email')
+    ,
+
+    check('password')
+    .not()
+    .isEmpty()
+    .isLength(6)
+    . withMessage( 'password more than 6 letters long')
+]
+
+
+
+
+
